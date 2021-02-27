@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/chat-app-react/static/css/main.e9adb5d9.chunk.css",
+    "main.js": "/chat-app-react/static/js/main.580a8f97.chunk.js",
+    "main.js.map": "/chat-app-react/static/js/main.580a8f97.chunk.js.map",
+    "runtime-main.js": "/chat-app-react/static/js/runtime-main.d640c3c3.js",
+    "runtime-main.js.map": "/chat-app-react/static/js/runtime-main.d640c3c3.js.map",
+    "static/js/2.141aec51.chunk.js": "/chat-app-react/static/js/2.141aec51.chunk.js",
+    "static/js/2.141aec51.chunk.js.map": "/chat-app-react/static/js/2.141aec51.chunk.js.map",
+    "static/js/3.33772807.chunk.js": "/chat-app-react/static/js/3.33772807.chunk.js",
+    "static/js/3.33772807.chunk.js.map": "/chat-app-react/static/js/3.33772807.chunk.js.map",
+    "index.html": "/chat-app-react/index.html",
+    "static/css/main.e9adb5d9.chunk.css.map": "/chat-app-react/static/css/main.e9adb5d9.chunk.css.map",
+    "static/js/2.141aec51.chunk.js.LICENSE.txt": "/chat-app-react/static/js/2.141aec51.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d640c3c3.js",
+    "static/js/2.141aec51.chunk.js",
+    "static/css/main.e9adb5d9.chunk.css",
+    "static/js/main.580a8f97.chunk.js"
+  ]
+}

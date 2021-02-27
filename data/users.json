@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "user1@website.com",
+      "password": "123",
+      "firstName": "Tom",
+      "secondName": "Silver",
+      "profileImageUrl": "https://i.ibb.co/K0hFfTX/profile02.jpg",
+      "city": "vilnius",
+      "about": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt blanditiis unde delectus aperiam suscipit perspiciatis libero debitis perferendis corporis."
+    },
+    {
+      "id": 2,
+      "email": "user2@website.com",
+      "password": "123",
+      "firstName": "John",
+      "secondName": "Buck",
+      "profileImageUrl": "https://i.ibb.co/54mFXJy/profile01.jpg",
+      "city": "kaunas",
+      "about": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt blanditiis unde delectus aperiam suscipit perspiciatis libero debitis perferendis corporis."
+    },
+    {
+      "id": 3,
+      "email": "user3@website.com",
+      "password": "123",
+      "firstName": "Silvia",
+      "secondName": "Gurt",
+      "profileImageUrl": "https://i.ibb.co/tHfKHyz/profile04.jpg",
+      "city": "klaipėda",
+      "about": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt blanditiis unde delectus aperiam suscipit perspiciatis libero debitis perferendis corporis."
+    }
+  ]
+}
