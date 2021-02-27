@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { faUserEdit } from "@fortawesome/free-solid-svg-icons";
 
-import { setActiveUser, setProfileViewOpen, setChatData } from "../../actions";
+import { setActiveUser, setProfileViewOpen, setChatData, setUserChats } from "../../actions";
 
 function UserPanel({ activeUser, setActiveUser, setProfileViewOpen, setChatData }) {
   return (
@@ -21,6 +21,7 @@ function UserPanel({ activeUser, setActiveUser, setProfileViewOpen, setChatData 
           onClick={() => {
             setActiveUser("");
             setChatData("");
+            setUserChats("");
           }}
         >
           <FontAwesomeIcon icon={faSignOutAlt} className="icon" />
@@ -40,7 +41,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   setActiveUser,
   setProfileViewOpen,
-  setChatData
+  setChatData,
+  setUserChats
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPanel);

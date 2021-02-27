@@ -28,6 +28,7 @@ ul {
   --chats-list-width: 400px;
   --friend-panel-width: 400px;
   --chat-view-width: calc(100% - var(--user-panel-width) - var(--chats-list-width) - var(--friend-panel-width));
+  --browserHeight: 56px;
 }
 
 p {
@@ -408,11 +409,10 @@ body {
     }
   }
   .sent-messages-container {
-    @include displayFlexColumn();
-    justify-content: flex-start;
     width: 100%;
     flex-grow: 1;
-    overflow: hidden;
+    overflow-y: auto;
+    display: inline-block;
     .overflow-wrapper {
       @include displayFlexColumn();
       justify-content: flex-start;
@@ -420,7 +420,6 @@ body {
       height: 100%;
       padding: 0 50px;
       padding-bottom: 10px;
-      overflow-y: scroll;
     }
     .message-container {
       @include displayFlex();
@@ -744,6 +743,12 @@ body {
 }
 
 @media only screen and (max-width: 450px) {
+  .app-wrapper {
+    .app-container {
+      height: calc(100vh - var(--browserHeight));
+    }
+  }
+
   .chat-view-container {
     .chat-view-content {
       @include displayFlexColumn();

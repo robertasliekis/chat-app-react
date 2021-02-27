@@ -103,7 +103,7 @@ function ChatView({
 
   const getUserFriends = () => {
     let userFriends = [];
-    if (userChats !== undefined && userChats !== "") {
+    if (userChats !== undefined && userChats !== "" && activeUser !== "") {
       activeUser.friendsId.forEach((friendId) => {
         users.forEach((user) => {
           if (friendId === user.id) {
