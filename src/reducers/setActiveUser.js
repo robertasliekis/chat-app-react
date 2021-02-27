@@ -1,6 +1,6 @@
 const initialState = {
-  activeUser1: "",
-  activeUser: {
+  activeUser: "",
+  activeUser1: {
     id: 1,
     email: "user1@website.com",
     password: "123",
