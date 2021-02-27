@@ -1,0 +1,834 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  box-sizing: border-box;
+}
+
+ul {
+  padding-inline-start: 0;
+  li {
+    list-style-type: none;
+    display: block;
+  }
+}
+
+:root {
+  --global-color-blue: rgb(104, 154, 201);
+  --global-color-grey1: #f9fafc;
+  --global-color-grey2: #eaeff5;
+  --container-shadow-light: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+  --container-shadow-dark: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+  --user-panel-width: 80px;
+  --chats-list-width: 400px;
+  --friend-panel-width: 400px;
+  --chat-view-width: calc(100% - var(--user-panel-width) - var(--chats-list-width) - var(--friend-panel-width));
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+textarea,
+button,
+input {
+  font-family: "Roboto", sans-serif;
+}
+
+textarea {
+  resize: none;
+  outline: none;
+}
+
+input,
+select {
+  outline: none;
+}
+
+div {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--global-color-grey1);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--global-color-blue);
+}
+
+@mixin displayFlex {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+@mixin displayFlexBetween {
+  @include displayFlex();
+  justify-content: space-between;
+}
+
+@mixin displayFlexColumn {
+  @include displayFlex();
+  flex-direction: column;
+}
+
+@mixin positionAbsoluteCenter {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+@mixin roundField {
+  width: 250px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+}
+
+.app-wrapper {
+  @include displayFlexColumn();
+  width: 100%;
+  height: 100%;
+  .app-container {
+    height: 800px;
+    width: 400px;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+  }
+}
+
+.login-view-container {
+  @include displayFlexColumn();
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+
+.form {
+  @include displayFlexColumn();
+  .form-input {
+    @include displayFlexColumn();
+    justify-content: flex-start;
+    position: relative;
+    .input-field {
+      position: relative;
+      input,
+      select,
+      textarea {
+        @include roundField();
+        padding-left: 30px;
+        background-color: var(--global-color-grey1);
+        border: 1px solid var(--global-color-grey2);
+        color: var(--global-color-blue);
+        color: black;
+      }
+      ::placeholder {
+        color: var(--global-color-blue);
+      }
+
+      .icon {
+        position: absolute;
+        transform: translate(0, -50%);
+        left: 10px;
+        top: 50%;
+        color: var(--global-color-blue);
+      }
+    }
+  }
+  .error-message {
+    color: var(--global-color-blue);
+    height: 20px;
+  }
+  .error-message-incorrect-input {
+    position: absolute;
+    bottom: 0;
+  }
+  .btn-wide {
+    @include roundField();
+    background-color: var(--global-color-blue);
+    color: white;
+    font-size: 20px;
+    box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+}
+
+.login-form {
+  padding-bottom: 100px;
+  .logo {
+    @include displayFlex();
+    align-items: center;
+    margin-bottom: 40px;
+    .icon-top {
+      color: var(--global-color-blue);
+      font-size: 90px;
+    }
+    .form-main-heading {
+      color: var(--global-color-blue);
+      margin-left: 10px;
+      font-weight: 600;
+    }
+  }
+}
+
+.chat-view-container {
+  @include positionAbsoluteCenter();
+  @include displayFlexColumn();
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  .chat-view-content {
+    @include displayFlex();
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+}
+
+.user-panel-container {
+  width: var(--user-panel-width);
+  height: 100%;
+  background-color: var(--global-color-blue);
+  .container {
+    width: 100%;
+    height: 100%;
+    @include displayFlexColumn();
+    justify-content: space-between;
+    padding: 10px 0;
+    .profile-image {
+      width: 60px;
+      height: 60px;
+      background-position: center;
+      background-size: cover;
+      border-radius: 50px;
+    }
+    .btn {
+      @include displayFlexColumn();
+      background-color: transparent;
+      border: none;
+      color: white;
+      .btn-text {
+        font-size: 14px;
+        opacity: 0.6;
+      }
+      .icon {
+        font-size: 25px;
+        margin-bottom: 5px;
+      }
+    }
+    .btn-edit-profile {
+      .icon {
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+.chats-list-container {
+  @include displayFlexColumn();
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: var(--chats-list-width);
+  height: 100%;
+  background: var(--global-color-grey1);
+  .chats-list-top {
+    @include displayFlexBetween();
+    height: 70px;
+    width: 100%;
+    padding: 0 10px;
+    position: relative;
+    h1 {
+      font-weight: 500;
+      font-size: 30px;
+    }
+    .btn-new-chat {
+      border: none;
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+      font-size: 20px;
+      background-color: var(--global-color-blue);
+      color: white;
+    }
+  }
+  .user-chats {
+    @include displayFlexColumn();
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0 10px;
+    .user-chat {
+      @include displayFlex();
+      justify-content: flex-start;
+      margin-bottom: 10px;
+      background-color: white;
+      border-radius: 10px;
+      width: 100%;
+      height: 70px;
+      padding: 0 5px;
+      box-shadow: var(--container-shadow-light);
+      cursor: pointer;
+      .friend-profile-image {
+        @include displayFlex();
+        position: relative;
+        width: 60px;
+        height: 60px;
+        background-color: var(--global-color-grey2);
+        border-radius: 30px;
+        background-position: center;
+        background-size: contain;
+        .icon {
+          font-size: 30px;
+          color: white;
+        }
+      }
+      .chat-info {
+        margin-left: 10px;
+        .name-container {
+          @include displayFlex();
+          justify-content: flex-start;
+          font-weight: 600;
+          margin-bottom: 3px;
+          .firstname {
+            margin-right: 5px;
+          }
+        }
+        .last-message-container {
+          @include displayFlex();
+          font-size: 14px;
+          .message-sender {
+            margin-right: 5px;
+            text-transform: capitalize;
+          }
+          .message-text {
+            display: block;
+            white-space: nowrap;
+            width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+    }
+    .active-chat {
+      background-color: var(--global-color-blue);
+      .name-container,
+      .last-message-container {
+        color: white;
+      }
+    }
+  }
+}
+
+.messages-window-container {
+  width: var(--chat-view-width);
+  height: 100%;
+  @include displayFlexColumn();
+  justify-content: space-between;
+  overflow: hidden;
+  .users-in-chat-container {
+    @include displayFlex();
+    box-shadow: var(--container-shadow-light);
+    justify-content: flex-start;
+    width: 100%;
+    height: 70px;
+    padding: 0 10px;
+    flex-shrink: 0;
+
+    .user-in-chat-info {
+      @include displayFlex();
+      .user-avatar-container {
+        @include displayFlex();
+        width: 40px;
+        height: 40px;
+        border-radius: 30px;
+        background-color: var(--global-color-grey2);
+        margin-right: 5px;
+        background-position: center;
+        background-size: contain;
+      }
+      .name-container {
+        @include displayFlex();
+        font-weight: 500;
+        font-size: 20px;
+        .user-firstname {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+  .sent-messages-container {
+    @include displayFlexColumn();
+    justify-content: flex-start;
+    width: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+    .overflow-wrapper {
+      @include displayFlexColumn();
+      justify-content: flex-start;
+      width: 100%;
+      height: 100%;
+      padding: 0 50px;
+      padding-bottom: 10px;
+      overflow-y: scroll;
+    }
+    .message-container {
+      @include displayFlex();
+      position: relative;
+      justify-content: flex-start;
+      border-radius: 20px;
+      max-width: 400px;
+      margin-top: 40px;
+      .message-timer {
+        position: absolute;
+      }
+      .name-container {
+        position: absolute;
+        transform: translate(0, -100%);
+        top: -3px;
+        @include displayFlex();
+        font-size: 12px;
+        .sender-firstname {
+          margin-right: 5px;
+        }
+      }
+      .friend-avatar-container {
+        position: absolute;
+        bottom: 0;
+        @include displayFlex();
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+        background-color: var(--global-color-grey2);
+        color: white;
+        background-position: center;
+        background-size: contain;
+      }
+      .message-text {
+        text-align: justify;
+        padding: 10px 15px;
+        font-size: 14px;
+        font-weight: 300;
+      }
+    }
+    .message-container-right {
+      border-bottom-right-radius: 0;
+      align-self: flex-end;
+      background-color: var(--global-color-blue);
+      .message-text {
+        color: white;
+      }
+      .friend-avatar-container {
+        right: -40px;
+      }
+      .message-timer {
+        transform: translate(-100%, 0);
+        left: -5px;
+      }
+    }
+    .message-container-left {
+      border-bottom-left-radius: 0;
+      align-self: flex-start;
+      background-color: var(--global-color-grey2);
+      .friend-avatar-container {
+        left: -40px;
+      }
+      .message-timer {
+        transform: translate(100%, 0);
+        right: -5px;
+      }
+    }
+  }
+  .send-message-container {
+    @include displayFlexBetween();
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100px;
+    box-shadow: var(--container-shadow-light);
+    padding-left: 5px;
+    flex-shrink: 0;
+    .message-input {
+      background-color: white;
+      height: 60px;
+      flex-grow: 1;
+      border-radius: 10px;
+      border: none;
+      background-color: var(--global-color-grey1);
+      font-size: 14px;
+      padding: 10px;
+    }
+    .btn-send-message {
+      background-color: var(--global-color-blue);
+
+      color: white;
+      margin-left: 5px;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 20px;
+    }
+    .dissapearing-message-container {
+      @include displayFlex();
+      justify-content: flex-end;
+      margin-left: 5px;
+      width: 100%;
+      label {
+        display: inline-block;
+        text-align: right;
+        margin-right: 5px;
+      }
+      .check-box {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        font-size: 17px;
+        visibility: hidden;
+        margin: 0;
+      }
+      .check-box:after {
+        content: " ";
+        background-color: #fff;
+        display: inline-block;
+        color: var(--global-color-blue);
+        width: 25px;
+        height: 25px;
+        visibility: visible;
+        border: 2px solid var(--global-color-blue);
+        padding-left: 3px;
+        border-radius: 5px;
+      }
+
+      .check-box:checked:after {
+        content: "\2714";
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.friend-panel-container {
+  width: var(--friend-panel-width);
+  height: 100%;
+  background-color: var(--global-color-grey1);
+  .container {
+    width: 100%;
+    height: 100%;
+    @include displayFlexColumn();
+    justify-content: flex-start;
+    padding-top: 60px;
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      background-position: center;
+      background-size: cover;
+      border-radius: 80px;
+      margin-bottom: 10px;
+      background-color: var(--global-color-grey2);
+    }
+    .names-container {
+      @include displayFlex();
+      font-size: 20px;
+      font-weight: 500;
+      .first-name {
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.profile-view-container {
+  @include displayFlex();
+  position: absolute;
+  transform: translate(0, 0);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  .profile-form {
+    @include displayFlex();
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 680px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    .form-main-heading {
+      width: 100%;
+      text-align: left;
+      font-weight: 500;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .form-title {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .profile-info-container {
+      @include displayFlex();
+      justify-content: flex-start;
+      width: 100%;
+      margin-bottom: 20px;
+      .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 80px;
+        background-color: var(--global-color-grey2);
+        background-position: center;
+        background-size: cover;
+      }
+      .profile-info {
+        @include displayFlexColumn();
+        align-items: flex-start;
+        margin-left: 20px;
+        .names-container {
+          @include displayFlex();
+          justify-content: flex-start;
+          font-size: 25px;
+          .first-name {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+
+    .form-input {
+      position: relative;
+      width: 48%;
+      .input-field {
+        position: relative;
+        @include displayFlexColumn();
+        align-items: flex-start;
+        width: 100%;
+        label {
+          display: inline-block;
+          text-align: right;
+          padding-right: 15px;
+          margin-bottom: 5px;
+          font-size: 14px;
+        }
+        input,
+        textarea {
+          width: 100%;
+          padding: 0 10px;
+          font-size: 16px;
+        }
+      }
+      .error-message-email-exist {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+    }
+    .form-input-about {
+      width: 100%;
+      .input-field {
+        textarea {
+          height: 100px;
+        }
+      }
+    }
+    .buttons-container {
+      @include displayFlexBetween();
+      width: 100%;
+      .btn-wide {
+        width: 48%;
+      }
+    }
+  }
+}
+
+.new-chat-container {
+  @include displayFlexColumn();
+  transform: translate(0, 0);
+  left: calc(var(--user-panel-width) + var(--chats-list-width));
+  top: 10px;
+  align-items: flex-start;
+  position: absolute;
+  min-width: 250px;
+  background-color: white;
+  box-shadow: var(--container-shadow-dark);
+  padding: 10px;
+  z-index: 10;
+  h1 {
+    color: black;
+    margin-bottom: 5px;
+  }
+  .friend-info {
+    @include displayFlex();
+    margin-bottom: 10px;
+    cursor: pointer;
+    .friend-profile-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 30px;
+      background-position: center;
+      background-size: cover;
+      background-color: var(--global-color-grey2);
+    }
+    .name-container {
+      @include displayFlex();
+      margin-left: 5px;
+      color: black;
+      .firstname {
+        margin-right: 5px;
+      }
+    }
+  }
+  .friend-info:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.dark-overlay-container {
+  @include positionAbsoluteCenter();
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.btn-back {
+  display: none;
+}
+
+@media only screen and (max-width: 450px) {
+  .chat-view-container {
+    .chat-view-content {
+      @include displayFlexColumn();
+      justify-content: flex-start;
+    }
+  }
+
+  .user-panel-container {
+    width: 100%;
+    height: 70px;
+    .container {
+      @include displayFlexBetween();
+      padding: 0 10px;
+    }
+  }
+
+  .chats-list-container {
+    width: 100%;
+    height: calc(100% - 70px);
+    .user-chats {
+      .active-chat {
+        background-color: white;
+        .name-container,
+        .last-message-container {
+          color: black;
+        }
+      }
+    }
+  }
+
+  .messages-window-container {
+    position: absolute;
+    width: 100%;
+    background-color: white;
+  }
+
+  .friend-panel-container {
+    display: none;
+  }
+
+  .new-chat-container {
+    left: 10px;
+    top: 140px;
+    width: calc(100% - 20px);
+  }
+
+  .btn-back {
+    display: flex;
+    color: var(--global-color-blue);
+    font-size: 30px;
+    margin-right: 10px;
+  }
+
+  .messages-window-hide-mobile {
+    display: none;
+  }
+
+  .messages-window-show-mobile {
+    display: flex;
+  }
+
+  .profile-view-container {
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+    .form-main-heading {
+      @include displayFlex();
+      justify-content: flex-start;
+    }
+    .profile-form {
+      @include displayFlexColumn();
+      flex-wrap: nowrap;
+      width: 100%;
+      border-radius: 0;
+      .form-input {
+        width: 100%;
+      }
+      .form-input-about {
+        width: 100%;
+        .input-field {
+          textarea {
+            height: 150px;
+          }
+        }
+      }
+    }
+  }
+}
