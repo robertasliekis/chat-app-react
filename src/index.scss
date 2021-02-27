@@ -387,9 +387,13 @@ body {
     height: 70px;
     padding: 0 10px;
     flex-shrink: 0;
+    border: 1px solid red;
+
     .user-in-chat-info {
       @include displayFlex();
       justify-content: flex-start;
+      border: 1px solid red;
+
       .user-avatar-container {
         @include displayFlex();
         width: 40px;
@@ -399,11 +403,14 @@ body {
         margin-right: 5px;
         background-position: center;
         background-size: contain;
+        border: 1px solid red;
       }
       .name-container {
         @include displayFlex();
         font-weight: 500;
         font-size: 20px;
+        border: 1px solid red;
+
         .user-firstname {
           margin-right: 5px;
         }
