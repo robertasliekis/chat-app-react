@@ -704,7 +704,6 @@ body {
   padding: 0 10px;
   -ms-flex-negative: 0;
       flex-shrink: 0;
-  border: 1px solid red;
 }
 
 .messages-window-container .users-in-chat-container .user-in-chat-info {
@@ -724,7 +723,6 @@ body {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  border: 1px solid red;
 }
 
 .messages-window-container .users-in-chat-container .user-in-chat-info .user-avatar-container {
@@ -748,7 +746,6 @@ body {
   margin-right: 5px;
   background-position: center;
   background-size: contain;
-  border: 1px solid red;
 }
 
 .messages-window-container .users-in-chat-container .user-in-chat-info .name-container {
@@ -767,7 +764,6 @@ body {
           align-items: center;
   font-weight: 500;
   font-size: 20px;
-  border: 1px solid red;
 }
 
 .messages-window-container .users-in-chat-container .user-in-chat-info .name-container .user-firstname {
@@ -1521,9 +1517,13 @@ body {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
     color: var(--global-color-blue);
     font-size: 30px;
-    margin-right: 10px;
+    width: 40px;
+    padding: 0;
   }
   .messages-window-hide-mobile {
     display: none;
