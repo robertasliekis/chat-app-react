@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
@@ -23,29 +23,41 @@ function ChatView({
   setUserChats,
   setChatFriend,
   setUserFriends,
-  setChatData
+  setChatData,
+  chatFriend
 }) {
   const [chatsLoading, setChatsLoading] = useState(true);
   const [chatsError, setChatsError] = useState("");
+  const [skaicius, setskaicius] = useState(9);
+
+  const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      setUserChats(getUserChats());
+      getChatFriendInfo();
+      getUserFriends();
+    }
+  }, [chats]);
 
   useEffect(() => {
     if (activeUser !== "") {
       getData();
     }
-  }, []);
+  }, [activeUser]);
 
   useEffect(() => {
-    getData();
+    if (activeUser !== "") {
+      getData();
+    }
   }, [dataUpdateIndex]);
 
   useEffect(() => {
-    setUserChats(getUserChats());
-    getChatFriendInfo();
-    constGetUserFriends();
-  }, [chats]);
-
-  useEffect(() => {
-    getChatFriendInfo();
+    if (activeUser !== "") {
+      getChatFriendInfo();
+    }
   }, [activeChatIndex]);
 
   const getData = () => {
@@ -89,16 +101,18 @@ function ChatView({
     }
   };
 
-  const constGetUserFriends = () => {
+  const getUserFriends = () => {
     let userFriends = [];
-    activeUser.friendsId.forEach((friendId) => {
-      users.forEach((user) => {
-        if (friendId === user.id) {
-          userFriends.push(user);
-        }
+    if (userChats !== undefined && userChats !== "") {
+      activeUser.friendsId.forEach((friendId) => {
+        users.forEach((user) => {
+          if (friendId === user.id) {
+            userFriends.push(user);
+          }
+        });
       });
-    });
-    setUserFriends(userFriends);
+      setUserFriends(userFriends);
+    }
   };
 
   const getChatFriendInfo = () => {
@@ -132,7 +146,8 @@ const mapStateToProps = (state) => {
     activeUser: state.setActiveUser.activeUser,
     userChats: state.setUserChats.userChats,
     activeChatIndex: state.setActiveChat.activeChatIndex,
-    dataUpdateIndex: state.setDataUpdated.dataUpdateIndex
+    dataUpdateIndex: state.setDataUpdated.dataUpdateIndex,
+    chatFriend: state.setChatFriend.chatFriend
   };
 };
 
