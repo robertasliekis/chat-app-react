@@ -248,6 +248,19 @@ body {
 }
 
 .form .btn-wide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 250px;
   height: 40px;
   border-radius: 10px;
@@ -474,6 +487,19 @@ body {
 }
 
 .chats-list-container .chats-list-top .btn-new-chat {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: none;
   height: 40px;
   width: 40px;
@@ -668,11 +694,11 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-shadow: var(--container-shadow-light);
-          box-shadow: var(--container-shadow-light);
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+  -webkit-box-shadow: var(--container-shadow-light);
+          box-shadow: var(--container-shadow-light);
   width: 100%;
   height: 70px;
   padding: 0 10px;
@@ -694,6 +720,9 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 
 .messages-window-container .users-in-chat-container .user-in-chat-info .user-avatar-container {
@@ -940,6 +969,19 @@ body {
 
 .messages-window-container .send-message-container .btn-send-message {
   background-color: var(--global-color-blue);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   color: white;
   margin-left: 5px;
   width: 40px;
@@ -1391,7 +1433,7 @@ body {
 }
 
 @media only screen and (max-width: 450px) {
-  .app-wrapper .app-container {
+  .app-wrapper .container-size {
     height: calc(100vh - var(--browserHeight));
   }
   .chat-view-container .chat-view-content {
@@ -1465,6 +1507,16 @@ body {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     color: var(--global-color-blue);
     font-size: 30px;
     margin-right: 10px;

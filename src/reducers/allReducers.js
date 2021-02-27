@@ -9,6 +9,7 @@ import setChatFriend from "./setChatFriend";
 import setUserFriends from "./setUserFriends";
 import setProfileViewOpen from "./setProfileViewOpen";
 import setNewChatWindowOpen from "./setNewChatWindowOpen";
+import setBrowserName from "./setBrowserName";
 
 export default combineReducers({
   setActiveUser: setActiveUser,
@@ -20,5 +21,6 @@ export default combineReducers({
   setChatFriend: setChatFriend,
   setUserFriends: setUserFriends,
   setProfileViewOpen: setProfileViewOpen,
-  setNewChatWindowOpen: setNewChatWindowOpen
+  setNewChatWindowOpen: setNewChatWindowOpen,
+  setBrowserName: setBrowserName
 });

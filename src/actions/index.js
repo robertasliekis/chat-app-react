@@ -64,3 +64,10 @@ export const setNewChatWindowOpen = () => {
     type: "SET_NEW_CHAT_WINDOW_OPEN"
   };
 };
+
+export const setBrowserName = (browserName) => {
+  return {
+    type: "SET_BROWSER_NAME",
+    payload: browserName
+  };
+};
