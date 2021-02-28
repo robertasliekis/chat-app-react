@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 function MessageTimer({ messageData, activeUser, onMessageTimerChange, messageIndex }) {
-  const [time, setTime] = useState(3);
+  const [time, setTime] = useState(10);
 
   useEffect(() => {
     if (time >= 1) {
