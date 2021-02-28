@@ -323,8 +323,7 @@ body {
     }
   }
   .user-chats {
-    @include displayFlexColumn();
-    justify-content: flex-start;
+    display: inline-block;
     width: 100%;
     padding: 0 10px;
     height: calc(100% - 70px);
@@ -735,9 +734,7 @@ body {
     height: 40px;
   }
   .friends-container {
-    @include displayFlexColumn();
-    align-items: flex-start;
-    justify-content: flex-start;
+    display: inline-block;
     width: 100%;
     overflow-y: auto;
     background-color: var(--global-color-grey1);
@@ -745,6 +742,8 @@ body {
     height: calc(100% - 40px);
     .friend-info {
       @include displayFlex();
+      justify-content: flex-start;
+      width: 100%;
       margin-bottom: 10px;
       cursor: pointer;
       .friend-profile-image {
