@@ -14,13 +14,27 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import { setActiveChat, setChatData } from "../../actions";
 
-function MessagesWindow({ activeUser, chats, activeChatIndex, userChats, setActiveChat, activeChatOpen, setChatData, chatFriend }) {
+function MessagesWindow({
+  activeUser,
+  chats,
+  activeChatIndex,
+  userChats,
+  dataUpdateIndex,
+  setActiveChat,
+  activeChatOpen,
+  setChatData,
+  chatFriend
+}) {
   const chatMessagesEnd = useRef(null);
   const { register, handleSubmit, errors } = useForm();
 
   const scrollToBottom = (scrollType) => {
     chatMessagesEnd.current?.scrollIntoView({ behavior: scrollType });
   };
+
+  useEffect(() => {
+    sendDataToBackEnd(chats);
+  }, [dataUpdateIndex]);
 
   useEffect(() => {
     scrollToBottom("smooth");
@@ -95,13 +109,9 @@ function MessagesWindow({ activeUser, chats, activeChatIndex, userChats, setActi
     updateChatData(messageData);
   };
 
-  const updateChatData = (messageData, messageIndex) => {
-    let updatedMessages = updateMessagesData(messageData, messageIndex);
-    setChatData(updatedMessages);
-    setActiveChat({ index: 0 });
-
+  const sendDataToBackEnd = (chats) => {
     axios
-      .put(apiData.url, { chats: updatedMessages }, apiData.headers)
+      .put(apiData.url, { chats: chats }, apiData.headers)
       .then(() => {
         setLoading(false);
       })
@@ -109,6 +119,13 @@ function MessagesWindow({ activeUser, chats, activeChatIndex, userChats, setActi
         setLoading(false);
         setError(err);
       });
+  };
+
+  const updateChatData = (messageData, messageIndex) => {
+    let updatedMessages = updateMessagesData(messageData, messageIndex);
+    setChatData(updatedMessages);
+    setActiveChat({ index: 0 });
+    sendDataToBackEnd(updateChatData);
   };
 
   const displayDissapearingMessage = (dissapearingMessage) => {
@@ -187,7 +204,8 @@ const mapStateToProps = (state) => {
     activeChatIndex: state.setActiveChat.activeChatIndex,
     activeChatOpen: state.setActiveChat.activeChatOpen,
     userChats: state.setUserChats.userChats,
-    chatFriend: state.setChatFriend.chatFriend
+    chatFriend: state.setChatFriend.chatFriend,
+    dataUpdateIndex: state.setDataUpdated.dataUpdateIndex
   };
 };
 

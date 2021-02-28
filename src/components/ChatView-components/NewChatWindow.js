@@ -1,9 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { setChatData, setActiveChat, setNewChatWindowOpen } from "../../actions";
+import { setChatData, setActiveChat, setNewChatWindowOpen, setDataUpdated } from "../../actions";
 
-function NewChatWindow({ userFriends, activeUser, newChatWindowOpen, chats, setChatData, userChats, setActiveChat, setNewChatWindowOpen }) {
+function NewChatWindow({
+  userFriends,
+  activeUser,
+  newChatWindowOpen,
+  chats,
+  setChatData,
+  userChats,
+  setActiveChat,
+  setNewChatWindowOpen,
+  setDataUpdated
+}) {
   const addNewChat = (friendId) => {
     let chatsDataCopy = JSON.parse(JSON.stringify(chats));
     let newChatId = chats.length + 1;
@@ -21,6 +31,7 @@ function NewChatWindow({ userFriends, activeUser, newChatWindowOpen, chats, setC
       setChatData(newChatsData);
       setActiveChat({ index: 0, open: true });
     }
+    setDataUpdated();
     setNewChatWindowOpen();
   };
 
@@ -68,6 +79,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { setChatData, setActiveChat, setNewChatWindowOpen };
+const mapDispatchToProps = { setChatData, setActiveChat, setNewChatWindowOpen, setDataUpdated };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewChatWindow);
