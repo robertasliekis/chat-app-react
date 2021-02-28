@@ -7,7 +7,6 @@ const setActiveUser = (state = initialState, action) => {
     case "SET_ACTIVE_USER":
       let data = action.payload;
       if (state.activeUser !== "" && data !== "") {
-        console.log("gera");
         data.id = state.activeUser.id;
         data.friendsId = state.activeUser.friendsId;
       }

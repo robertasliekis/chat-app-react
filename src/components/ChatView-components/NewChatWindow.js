@@ -18,7 +18,7 @@ function NewChatWindow({
     let chatsDataCopy = JSON.parse(JSON.stringify(chats));
     let newChatId = chats.length + 1;
     let newChat = {
-      chatID: newChatId,
+      id: newChatId,
       updateTime: Date.now(),
       usersIDs: [activeUser.id, friendId],
       messages: []
@@ -31,8 +31,8 @@ function NewChatWindow({
       setChatData(newChatsData);
       setActiveChat({ index: 0, open: true });
     }
-    setDataUpdated();
     setNewChatWindowOpen();
+    setDataUpdated();
   };
 
   const checkIfChatExists = (friendId) => {

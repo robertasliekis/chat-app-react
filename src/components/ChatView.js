@@ -37,7 +37,7 @@ function ChatView({
     if (activeUser !== "") {
       getDataFromBackEnd();
     }
-  }, [activeUser, dataUpdateIndex]);
+  }, [activeUser]);
 
   useEffect(() => {
     if (isInitialMount.current) {

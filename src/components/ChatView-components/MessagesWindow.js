@@ -33,16 +33,16 @@ function MessagesWindow({
   };
 
   useEffect(() => {
-    sendDataToBackEnd(chats);
-  }, [dataUpdateIndex]);
-
-  useEffect(() => {
     scrollToBottom("smooth");
   }, [chats, activeChatOpen]);
 
   useEffect(() => {
     scrollToBottom("auto");
   }, [activeChatIndex]);
+
+  useEffect(() => {
+    sendDataToBackEnd(chats);
+  }, [dataUpdateIndex]);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -125,7 +125,7 @@ function MessagesWindow({
     let updatedMessages = updateMessagesData(messageData, messageIndex);
     setChatData(updatedMessages);
     setActiveChat({ index: 0 });
-    sendDataToBackEnd(updateChatData);
+    sendDataToBackEnd(updatedMessages);
   };
 
   const displayDissapearingMessage = (dissapearingMessage) => {
