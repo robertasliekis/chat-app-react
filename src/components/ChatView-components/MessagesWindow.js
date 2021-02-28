@@ -41,13 +41,6 @@ function MessagesWindow({ activeUser, chats, activeChatIndex, userChats, setActi
     return messageSender[0];
   };
 
-  const onSubmit = (data, inputField) => {
-    inputField.target.reset();
-    let messageData = [activeUser.id, data.message];
-    messageData = setDissapearingMessage(messageData, data.dissapearingMessage);
-    updateChatData(messageData);
-  };
-
   const setDissapearingMessage = (messageData, dissapearingMessage) => {
     if (dissapearingMessage) {
       let displayDissapearingMessage = [
@@ -93,6 +86,13 @@ function MessagesWindow({ activeUser, chats, activeChatIndex, userChats, setActi
       }
     });
     return chatsDataCopy;
+  };
+
+  const onSubmit = (data, inputField) => {
+    inputField.target.reset();
+    let messageData = [activeUser.id, data.message];
+    messageData = setDissapearingMessage(messageData, data.dissapearingMessage);
+    updateChatData(messageData);
   };
 
   const updateChatData = (messageData, messageIndex) => {

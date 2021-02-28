@@ -16,7 +16,7 @@ function LoginView({ users, setActiveUser, activeUser }) {
 
   const [emailInput, setEmailInput] = useState("");
 
-  const checkUserNameAndPassword = (inputData) => {
+  const checkUserEmailAndPassword = (inputData) => {
     let userExist = false;
     users.forEach((user, index) => {
       if (user.email === inputData.email && user.password === inputData.password) {
@@ -36,7 +36,7 @@ function LoginView({ users, setActiveUser, activeUser }) {
   };
 
   const onSubmit = (inputData) => {
-    checkUserNameAndPassword(inputData);
+    checkUserEmailAndPassword(inputData);
   };
 
   if (activeUser === "")
@@ -51,7 +51,6 @@ function LoginView({ users, setActiveUser, activeUser }) {
             <div>
               <div className="input-field">
                 <input
-                  defaultValue="user1@website.com"
                   onChange={update}
                   name="email"
                   placeholder="Email"
@@ -70,13 +69,7 @@ function LoginView({ users, setActiveUser, activeUser }) {
           </div>
           <div className="form-input">
             <div className="input-field">
-              <input
-                defaultValue="123"
-                type="password"
-                placeholder="Password"
-                name="password"
-                ref={register({ required: "*Password is required" })}
-              />
+              <input type="password" placeholder="Password" name="password" ref={register({ required: "*Password is required" })} />
               <FontAwesomeIcon icon={faUser} className="icon" />
             </div>
             <div className="error-message">{errors.password && <p>{errors.password.message}</p>}</div>

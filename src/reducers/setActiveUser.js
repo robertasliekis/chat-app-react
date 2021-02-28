@@ -1,17 +1,5 @@
 const initialState = {
-  activeUser: "",
-  activeUser1: {
-    id: 1,
-    email: "user1@website.com",
-    password: "123",
-    friendsId: [2, 3, 4, 5, 6, 7, 8, 9, 10],
-    firstName: "Tom",
-    secondName: "Silver",
-    city: "vilnius",
-    profileImageUrl: "https://i.ibb.co/K0hFfTX/profile02.jpg",
-    about:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt blanditiis unde delectus aperiam suscipit perspiciatis libero debitis perferendis corporis."
-  }
+  activeUser: ""
 };
 
 const setActiveUser = (state = initialState, action) => {
