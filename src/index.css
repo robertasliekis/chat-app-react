@@ -1033,39 +1033,30 @@ body {
   width: 100%;
 }
 
-.messages-window-container .send-message-container .dissapearing-message-container label {
-  display: inline-block;
-  text-align: right;
-  margin-right: 5px;
-  margin-bottom: 3px;
-}
-
 .messages-window-container .send-message-container .dissapearing-message-container .check-box {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  font-size: 17px;
-  visibility: hidden;
-  margin: 0;
-  margin-top: 2px;
-}
-
-.messages-window-container .send-message-container .dissapearing-message-container .check-box:after {
-  content: " ";
-  background-color: #fff;
-  display: inline-block;
-  color: var(--global-color-blue);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 25px;
   height: 25px;
-  visibility: visible;
   border: 2px solid var(--global-color-blue);
-  padding-left: 3px;
   border-radius: 5px;
+  margin-left: 5px;
 }
 
-.messages-window-container .send-message-container .dissapearing-message-container .check-box:checked:after {
-  content: "\2714";
-  font-weight: bold;
+.messages-window-container .send-message-container .dissapearing-message-container .check-box .icon {
+  color: var(--global-color-blue);
+  font-size: 15px;
 }
 
 .friend-panel-container {

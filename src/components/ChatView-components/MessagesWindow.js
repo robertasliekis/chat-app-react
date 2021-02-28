@@ -10,6 +10,7 @@ import MessageTimer from "./MessageTimer";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import { setActiveChat, setChatData } from "../../actions";
 
@@ -33,7 +34,6 @@ function MessagesWindow({ activeUser, chats, activeChatIndex, userChats, setActi
   const [error, setError] = useState("");
 
   const [checked, setChecked] = useState(false);
-  const handleClick = () => setChecked(!checked);
 
   const getMessageSender = (messageSenderID) => {
     let usersInChat = userChats[activeChatIndex].usersInChat;
@@ -91,7 +91,7 @@ function MessagesWindow({ activeUser, chats, activeChatIndex, userChats, setActi
   const onSubmit = (data, inputField) => {
     inputField.target.reset();
     let messageData = [activeUser.id, data.message];
-    messageData = setDissapearingMessage(messageData, data.dissapearingMessage);
+    messageData = setDissapearingMessage(messageData, checked);
     updateChatData(messageData);
   };
 
@@ -160,8 +160,10 @@ function MessagesWindow({ activeUser, chats, activeChatIndex, userChats, setActi
 
       <form className="send-message-container" onSubmit={handleSubmit(onSubmit)}>
         <div className="dissapearing-message-container">
-          <label htmlFor="dissapearingMessage">Dissapearing message</label>
-          <input className="check-box" type="checkbox" name="dissapearingMessage" checked={checked} onChange={handleClick} ref={register} />
+          Dissapearing message
+          <div className="check-box" onClick={() => setChecked(!checked)}>
+            {checked ? <FontAwesomeIcon icon={faCheck} className="icon" /> : null}
+          </div>
         </div>
         <textarea
           className="message-input"
