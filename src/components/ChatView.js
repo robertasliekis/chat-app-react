@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 import apiData from "../data/apiData";
 
 import UserPanel from "./ChatView-components/UserPanel";
@@ -23,36 +26,35 @@ function ChatView({
   setUserChats,
   setChatFriend,
   setUserFriends,
-  setChatData,
-  chatFriend
+  setChatData
 }) {
-  const [chatsLoading, setChatsLoading] = useState(true);
+  const [chatsLoading, setChatsLoading] = useState(false);
   const [chatsError, setChatsError] = useState("");
-  const [skaicius, setskaicius] = useState(9);
 
   const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    if (activeUser !== "") {
+      getDataFromBackEnd();
+    }
+  }, [activeUser, dataUpdateIndex]);
 
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
       setUserChats(getUserChats());
-      getChatFriendInfo();
-      getUserFriends();
     }
   }, [chats]);
 
   useEffect(() => {
-    if (activeUser !== "") {
-      getData();
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      getChatFriendInfo();
+      getUserFriends();
     }
-  }, [activeUser]);
-
-  useEffect(() => {
-    if (activeUser !== "") {
-      getData();
-    }
-  }, [dataUpdateIndex]);
+  }, [userChats]);
 
   useEffect(() => {
     if (activeUser !== "") {
@@ -60,7 +62,8 @@ function ChatView({
     }
   }, [activeChatIndex]);
 
-  const getData = () => {
+  const getDataFromBackEnd = () => {
+    setChatsLoading(true);
     axios
       .get(apiData.url, apiData.headers)
       .then((response) => {
@@ -85,7 +88,7 @@ function ChatView({
           if (userID === activeUser.id) {
             matchedID = true;
           }
-          users.forEach((user, index) => {
+          users.forEach((user) => {
             if (userID === user.id) {
               usersInChat.push(user);
             }
@@ -131,12 +134,19 @@ function ChatView({
           <ChatsList />
           <MessagesWindow />
           <FriendPanel />
-          <NewChatWindow />
           <DarkOverlay />
+          <NewChatWindow />
         </div>
       </div>
     );
-  else return null;
+  else if (chatsLoading) {
+    return (
+      <div className="chats-loading-container">
+        Loading chats
+        <FontAwesomeIcon icon={faSpinner} className="icon" />
+      </div>
+    );
+  } else return null;
 }
 
 const mapStateToProps = (state) => {
@@ -146,8 +156,7 @@ const mapStateToProps = (state) => {
     activeUser: state.setActiveUser.activeUser,
     userChats: state.setUserChats.userChats,
     activeChatIndex: state.setActiveChat.activeChatIndex,
-    dataUpdateIndex: state.setDataUpdated.dataUpdateIndex,
-    chatFriend: state.setChatFriend.chatFriend
+    dataUpdateIndex: state.setDataUpdated.dataUpdateIndex
   };
 };
 

@@ -4,7 +4,7 @@ const initialState = {
     id: 1,
     email: "user1@website.com",
     password: "123",
-    friendsId: [2, 3, 4, 5],
+    friendsId: [2, 3, 4, 5, 6, 7, 8, 9, 10],
     firstName: "Tom",
     secondName: "Silver",
     city: "vilnius",

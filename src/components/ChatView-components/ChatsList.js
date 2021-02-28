@@ -10,9 +10,10 @@ function ChatsList({ activeUser, setActiveChat, activeChatIndex, userChats, setN
   const getLastMessageSender = (chat) => {
     let lastMessageText = "";
     let senderName = "";
-    if (chat.messages.length > 0) {
-      let lastMessageSenderID = chat.messages[chat.messages.length - 1][0];
-      lastMessageText = chat.messages[chat.messages.length - 1][1];
+    let messageIndex = getVisibleMessageIndex(chat);
+    if (chat.messages.length > 0 && messageIndex >= 0 && chat.messages.length > messageIndex) {
+      let lastMessageSenderID = chat.messages[messageIndex][0];
+      lastMessageText = chat.messages[messageIndex][1];
       senderName = "";
       if (lastMessageSenderID === activeUser.id) {
         senderName = "you";
@@ -23,6 +24,15 @@ function ChatsList({ activeUser, setActiveChat, activeChatIndex, userChats, setN
     }
     let lastMessage = { sender: senderName, text: lastMessageText };
     return lastMessage;
+  };
+
+  const getVisibleMessageIndex = (chat) => {
+    let chatsCopy = JSON.parse(JSON.stringify(chat));
+    let messageIndex = chatsCopy.messages.reverse().findIndex(function (message) {
+      return message[2] === undefined;
+    });
+    messageIndex = chat.messages.length - messageIndex - 1;
+    return messageIndex;
   };
 
   const getFriendProfile = (index) => {

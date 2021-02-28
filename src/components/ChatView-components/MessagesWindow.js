@@ -11,20 +11,9 @@ import MessageTimer from "./MessageTimer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
-import { setDataUpdated, setActiveChat, setChatData, setUserChats } from "../../actions";
+import { setActiveChat, setChatData } from "../../actions";
 
-function MessagesWindow({
-  activeUser,
-  chats,
-  activeChatIndex,
-  setDataUpdated,
-  userChats,
-  setActiveChat,
-  activeChatOpen,
-  setUserChats,
-  setChatData,
-  chatFriend
-}) {
+function MessagesWindow({ activeUser, chats, activeChatIndex, userChats, setActiveChat, activeChatOpen, setChatData, chatFriend }) {
   const chatMessagesEnd = useRef(null);
   const { register, handleSubmit, errors } = useForm();
 
@@ -34,7 +23,7 @@ function MessagesWindow({
 
   useEffect(() => {
     scrollToBottom("smooth");
-  }, [chats]);
+  }, [chats, activeChatOpen]);
 
   useEffect(() => {
     scrollToBottom("auto");
@@ -70,65 +59,56 @@ function MessagesWindow({
     return messageData;
   };
 
-  const updateChatData = (messageData, messageIndex) => {
-    let activeChatID = userChats[activeChatIndex].chatID;
+  const deleteDissapearingMessage = (messageData) => {
+    let displayDissapearingMessage = messageData[2];
+    let seenCount = 0;
+    if (displayDissapearingMessage) {
+      displayDissapearingMessage.forEach((message, index) => {
+        if (!message[1]) {
+          seenCount++;
+        }
+      });
+      if (seenCount === displayDissapearingMessage.length) {
+        return true;
+      } else return false;
+    }
+  };
+
+  const updateMessagesData = (messageData, messageIndex) => {
+    let activeChatID = userChats[activeChatIndex].id;
     let chatsDataCopy = JSON.parse(JSON.stringify(chats));
-    let openChat = JSON.parse(JSON.stringify(userChats[activeChatIndex]));
-    let deleteMessage = false;
-
-    if (messageData[2]) {
-      deleteMessage = deleteDissapearingMessage(messageData[2]);
-    }
-
-    if (messageIndex === undefined) {
-      openChat.updateTime = Date.now();
-      openChat.messages.push(messageData);
-    } else {
-      if (deleteMessage) {
-        openChat.messages.splice(messageIndex, 1);
-      } else {
-        openChat.messages[messageIndex] = messageData;
-      }
-    }
-
-    chatsDataCopy.forEach((chat, index) => {
-      if (activeChatID === chat.chatID) {
-        chatsDataCopy[index] = openChat;
+    let deleteMessage = deleteDissapearingMessage(messageData);
+    chatsDataCopy.forEach((chat) => {
+      if (activeChatID === chat.id) {
         if (messageIndex === undefined) {
-          chatsDataCopy[index].updateTime = Date.now();
+          chat.updateTime = Date.now();
+          chat.messages.push(messageData);
+        } else {
+          if (deleteMessage) {
+            chat.messages.splice(messageIndex, 1);
+          } else {
+            chat.messages[messageIndex] = messageData;
+          }
         }
       }
     });
+    return chatsDataCopy;
+  };
 
-    let updatedUserChats = JSON.parse(JSON.stringify(userChats));
-    updatedUserChats[activeChatIndex] = openChat;
-
-    setUserChats(updatedUserChats);
-    setChatData(chatsDataCopy);
+  const updateChatData = (messageData, messageIndex) => {
+    let updatedMessages = updateMessagesData(messageData, messageIndex);
+    setChatData(updatedMessages);
     setActiveChat({ index: 0 });
 
     axios
-      .put(apiData.url, { chats: chatsDataCopy }, apiData.headers)
+      .put(apiData.url, { chats: updatedMessages }, apiData.headers)
       .then(() => {
         setLoading(false);
-        setDataUpdated();
       })
       .catch((err) => {
         setLoading(false);
         setError(err);
       });
-  };
-
-  const deleteDissapearingMessage = (displayDissapearingMessage) => {
-    let seenCount = 0;
-    displayDissapearingMessage.forEach((message, index) => {
-      if (!message[1]) {
-        seenCount++;
-      }
-    });
-    if (seenCount === displayDissapearingMessage.length) {
-      return true;
-    } else return false;
   };
 
   const displayDissapearingMessage = (dissapearingMessage) => {
@@ -210,9 +190,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  setDataUpdated,
   setActiveChat,
-  setUserChats,
   setChatData
 };
 

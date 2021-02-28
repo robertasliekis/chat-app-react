@@ -15,11 +15,11 @@ function NewChatWindow({ userFriends, activeUser, newChatWindowOpen, chats, setC
     };
     let sameChat = checkIfChatExists(friendId);
     if (sameChat.chatExist) {
-      setActiveChat(sameChat.chatIndex);
+      setActiveChat({ index: sameChat.chatIndex, open: true });
     } else {
       let newChatsData = [newChat, ...chatsDataCopy];
       setChatData(newChatsData);
-      setActiveChat(0);
+      setActiveChat({ index: 0, open: true });
     }
     setNewChatWindowOpen();
   };
@@ -42,15 +42,17 @@ function NewChatWindow({ userFriends, activeUser, newChatWindowOpen, chats, setC
     return (
       <div className="new-chat-container" style={{ display: newChatWindowOpen ? "flex" : "none" }}>
         <h1>New chat</h1>
-        {userFriends.map((friend, index) => (
-          <div className="friend-info" key={index} onClick={() => addNewChat(friend.id)}>
-            <div className="friend-profile-image" style={{ backgroundImage: `url("${friend.profileImageUrl}")` }}></div>
-            <div className="name-container">
-              <div className="firstname">{friend.firstName}</div>
-              <div className="secondname">{friend.secondName}</div>
+        <div className="friends-container">
+          {userFriends.map((friend, index) => (
+            <div className="friend-info" key={index} onClick={() => addNewChat(friend.id)}>
+              <div className="friend-profile-image" style={{ backgroundImage: `url("${friend.profileImageUrl}")` }}></div>
+              <div className="name-container">
+                <div className="firstname">{friend.firstName}</div>
+                <div className="secondname">{friend.secondName}</div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     );
   else return null;
