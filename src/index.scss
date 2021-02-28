@@ -537,6 +537,9 @@ body {
       height: 50px;
       border: none;
       border-radius: 10px;
+      .icon {
+        font-size: 20px;
+      }
     }
     .dissapearing-message-container {
       @include displayFlex();

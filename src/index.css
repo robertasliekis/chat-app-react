@@ -1012,6 +1012,10 @@ body {
   border-radius: 10px;
 }
 
+.messages-window-container .send-message-container .btn-send-message .icon {
+  font-size: 20px;
+}
+
 .messages-window-container .send-message-container .dissapearing-message-container {
   display: -webkit-box;
   display: -ms-flexbox;
