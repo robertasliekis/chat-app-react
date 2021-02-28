@@ -347,7 +347,7 @@ body {
         background-color: var(--global-color-grey2);
         border-radius: 30px;
         background-position: center;
-        background-size: contain;
+        background-size: cover;
         .icon {
           font-size: 30px;
           color: white;
@@ -417,7 +417,7 @@ body {
         background-color: var(--global-color-grey2);
         margin-right: 5px;
         background-position: center;
-        background-size: contain;
+        background-size: cover;
       }
       .name-container {
         @include displayFlex();
@@ -472,7 +472,7 @@ body {
         background-color: var(--global-color-grey2);
         color: white;
         background-position: center;
-        background-size: contain;
+        background-size: cover;
       }
       .message-text {
         text-align: justify;

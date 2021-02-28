@@ -52,7 +52,7 @@ function LoginView({ users, setActiveUser, activeUser }) {
               <div className="input-field">
                 <input
                   onChange={update}
-                  defaultValue="user1@website.com"
+                  // defaultValue="user1@website.com"
                   name="email"
                   placeholder="Email"
                   ref={register({
@@ -74,7 +74,7 @@ function LoginView({ users, setActiveUser, activeUser }) {
                 type="password"
                 placeholder="Password"
                 name="password"
-                defaultValue="123"
+                // defaultValue="123"
                 ref={register({ required: "*Password is required" })}
               />
               <FontAwesomeIcon icon={faUser} className="icon" />

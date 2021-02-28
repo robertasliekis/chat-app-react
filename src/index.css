@@ -600,7 +600,7 @@ body {
   background-color: var(--global-color-grey2);
   border-radius: 30px;
   background-position: center;
-  background-size: contain;
+  background-size: cover;
 }
 
 .chats-list-container .user-chats .user-chat .friend-profile-image .icon {
@@ -766,7 +766,7 @@ body {
   background-color: var(--global-color-grey2);
   margin-right: 5px;
   background-position: center;
-  background-size: contain;
+  background-size: cover;
 }
 
 .messages-window-container .users-in-chat-container .user-in-chat-info .name-container {
@@ -899,7 +899,7 @@ body {
   background-color: var(--global-color-grey2);
   color: white;
   background-position: center;
-  background-size: contain;
+  background-size: cover;
 }
 
 .messages-window-container .sent-messages-container .message-container .message-text {
